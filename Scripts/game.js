@@ -16,10 +16,6 @@ var Game = (function () {
         { id: "introButton", src: "./Assets/images/intro.png" },
         { id: "nextButton", src: "./Assets/images/nextButton.png" },
         { id: "backButton", src: "./Assets/images/backButton.png" },
-        { id: "ocean", src: "./Assets/images/ocean.gif" },
-        { id: "plane", src: "./Assets/images/plane.png" },
-        { id: "island", src: "./Assets/images/island.png" },
-        { id: "cloud", src: "./Assets/images/cloud.png" },
         { id: "city", src: "./Assets/images/city.jpg" },
         { id: "supe", src: "./Assets/images/sp1.png" },
         { id: "supe2", src: "./Assets/images/sp2.png" },
@@ -31,6 +27,7 @@ var Game = (function () {
         { id: "beam2", src: "./Assets/images/beam2.png" },
         { id: "enemy", src: "./Assets/images/alien.png" },
         { id: "m1", src: "./Assets/audio/m1.mp3" },
+        { id: "smoke", src: "./Assets/audio/smoke.wav" },
         { id: "beamsound", src: "./Assets/audio/beamsound.wav" }
     ];
     function Preload() {
