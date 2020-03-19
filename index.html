@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS Section -->
+    <link rel="stylesheet" href="./Content/game.css">
+    <title>Scrolling 2D Game</title>
+</head>
+<body>
+    <div id="mainContent">
+        <!-- The game "lives" inside the canvas -->
+        <canvas id="canvas" width="1200" height="600"></canvas>
+    </div>
+    
+    <!-- JavaScript Section -->
+
+    <!-- 3rd party libraries-->
+    <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
+    <script src="./node_modules/tweenjs/lib/tweenjs.min.js"></script>
+    <script src="./node_modules/soundjs/lib/soundjs.min.js"></script>
+    <script src="./node_modules/preloadjs/lib/preloadjs.min.js"></script>
+
+    <!-- Game Scripts -->
+
+    <!-- Component Scripts -->
+    <script src="./Scripts/util/Mathf.js"></script>
+    <script src="./Scripts/objects/Vector2.js"></script>
+    <script src="./Scripts/objects/GameObject.js"></script>
+    <script src="./Scripts/objects/Scene.js"></script>
+    <script src="./Scripts/scenes/State.js"></script>
+    <script src="./Scripts/config/game.js"></script>
+
+    <!-- Managers -->
+    <script src="./Scripts//managers/Collision.js"></script>
+    
+     <!-- Keyboards -->
+    <script src="./Scripts/managers/keyboard.js"></script>
+    <script src="./Scripts/config/key.js"></script>
+
+    <!-- Game Objects -->
+    <script src="./Scripts/objects/Player.js"></script>
+    <script src="./Scripts/objects/Label.js"></script>
+    <script src="./Scripts/objects/Button.js"></script>
+    <script src="./Scripts/objects/City.js"></script>
+    <script src="./Scripts/objects/Image.js"></script>
+    <script src="./Scripts/objects/Enemy.js"></script>
+    <script src="./Scripts/objects/Live.js"></script>
+
+
+    <!-- Scenes -->
+    <script src="./Scripts/scenes/End.js"></script>
+    <script src="./Scripts/scenes/Play.js"></script>
+    <script src="./Scripts/scenes/Start.js"></script>
+
+    <script src="./Scripts/game.js"></script>
+</body>
+</html>
