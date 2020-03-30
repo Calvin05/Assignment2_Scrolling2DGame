@@ -10,7 +10,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.ASSETS.getResult("city"));
+            super(config.Game.CITY_ATLAS, "city");
 
             this.Start();
         }

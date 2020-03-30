@@ -2,12 +2,7 @@ module scenes
 {
     export class Play extends objects.Scene
     {
-        // PRIVATE INSTANCE MEMBERS
-        // private _ocean?: objects.Ocean;
-        // private _plane?: objects.Plane;
-        // private _island?: objects.Island;
-        // private _clouds?: objects.Cloud[];
-        // private _cloudNumber: number;
+        // PRIVATE INSTANCE MEMBER
         private _city:objects.City;
         private _supe:objects.Player;
         private _bullets:Array<objects.Image>;

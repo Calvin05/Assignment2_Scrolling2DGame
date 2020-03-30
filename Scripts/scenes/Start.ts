@@ -8,7 +8,7 @@ module scenes
         private _introButton: objects.Button;
         // private _ocean: objects.Ocean;
         private _city:objects.City;
-        private _title:objects.Image;
+        private _title:objects.Button;
         public hit = false;
         private _supeAnimation:createjs.Sprite;
 
@@ -34,7 +34,7 @@ module scenes
             
             //  this._ocean = new objects.Ocean();
             this._city = new objects.City();
-            this._title = new objects.Image(config.Game.ASSETS.getResult("title"), 600, 130, true);
+            this._title = new objects.Button(config.Game.ASSETS.getResult("title"), 600, 130, true);
             
             this._supeAnimation = this.FlyAnimation();
             this.Main();

@@ -32,7 +32,7 @@ var scenes;
             this._introButton = new objects.Button(config.Game.ASSETS.getResult("introButton"), 700, 480, true);
             //  this._ocean = new objects.Ocean();
             this._city = new objects.City();
-            this._title = new objects.Image(config.Game.ASSETS.getResult("title"), 600, 130, true);
+            this._title = new objects.Button(config.Game.ASSETS.getResult("title"), 600, 130, true);
             this._supeAnimation = this.FlyAnimation();
             this.Main();
         };

@@ -9,5 +9,7 @@ module config
         public static FPS: number = 60; // 60 Frames per second
         public static CLOUD_NUM = 5;
         public static keyboardManager: managers.Keyboard;
+        public static TEXTURE_ATLAS: createjs.SpriteSheet;
+        public static CITY_ATLAS: createjs.SpriteSheet;
     }
 }

@@ -12,6 +12,7 @@ let Game = (function(){
 
     let assets: createjs.LoadQueue;
 
+    let cityAtlas:createjs.SpriteSheet;
     let assetManifest = 
     [
         {id:"button", src:"./Assets/images/button.png"},
@@ -35,6 +36,17 @@ let Game = (function(){
         {id:"beamsound", src:"./Assets/audio/beamsound.wav"}
         
     ];
+
+    let cityData = 
+    {
+        "images": {},
+        "frames": [
+            [0, 0, 2311, 600],
+        ],
+        "animations": {
+            "city": { "frames": [0] },
+        }
+    }
 
     function Preload():void
     {
@@ -61,6 +73,11 @@ let Game = (function(){
         config.Game.SCENE = scenes.State.START;
         keyboardManager = new managers.Keyboard();
         config.Game.keyboardManager = keyboardManager;
+
+        cityData.images = [assets.getResult("ocean")];
+        cityAtlas = new createjs.SpriteSheet(cityData);
+        config.Game.CITY_ATLAS = cityAtlas;
+        
     }
 
     /**

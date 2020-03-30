@@ -1,6 +1,6 @@
 module objects
 {
-    export abstract class GameObject extends createjs.Bitmap
+    export abstract class GameObject extends createjs.Sprite
     {
         // PRIVATE INSTANCE MEMBERS
         private _width:number;
@@ -11,7 +11,8 @@ module objects
         private _velocity:Vector2;
         private _isColliding:boolean;
         private _isCentered:boolean;
-        
+        private _isActive : boolean;
+        private _type: enums.GameObjectType;
         // PUBLIC PROPERTIES
         get width():number
         {
@@ -91,14 +92,33 @@ module objects
             }
         }
 
+        public get isActive() : boolean 
+        {
+            return this._isActive;
+        }
+
+        public set isActive(v : boolean) 
+        {
+            this._isActive = v;
+        }
+
+        public get type() : enums.GameObjectType 
+        {
+            return this._type;
+        }
+
+        public set type(v : enums.GameObjectType) 
+        {
+            this._type = v;
+        }
+
 
         // CONSTRUCTOR
-        constructor(imageString?:Object, x?:number, y?:number, centered?:boolean)
-        constructor(imageString: Object, position: Vector2, centered?:boolean)
-        constructor(first:Object = config.Game.ASSETS.getResult("placeholder"), 
-                    second:Vector2 | number = 0, third:boolean | number = 0, fourth:boolean = false)
+        constructor(sprite_sheet?:createjs.SpriteSheet, frame_name?: string, x?:number, y?:number, centered?:boolean)
+        constructor(sprite_sheet:createjs.SpriteSheet, frame_name: string, position: objects.Vector2, centered?: boolean)
+        constructor(first: createjs.SpriteSheet,second: string = "placeholder",  third: Vector2 | number = 0, fourth: boolean | number = 0, fifth:boolean = false)
         {
-            super(first);
+            super(first, second);
 
             // initialization
             this._width = 0;
@@ -109,36 +129,34 @@ module objects
             this._velocity = new Vector2(0, 0);
             this._isColliding = false;
             this._isCentered = false;
+            this._isActive = false;
             
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
 
-            if(typeof third == "boolean")
+            if(fifth != undefined)
             {
-                this.isCentered = third;
+                this.isCentered = fifth;
             }
 
-            if(typeof third == "undefined")
-            {
-                this.isCentered = false;
-            }
-
-            if(fourth)
+            if(typeof fourth == "boolean")
             {
                 this.isCentered = fourth;
             }
             
 
-            if((typeof second == "number") && (typeof third == "number"))
+            if((typeof third == "number") && (typeof fourth == "number"))
             {
-                this.position = new Vector2(second, third, this);
+                this.position = new Vector2(third, fourth, this);
             }
 
-            if(second instanceof Vector2) 
+            if(third instanceof Vector2)
             {
-                this.position = second;
+                this.position = third;
             }
-           
+
+            this.type = enums.GameObjectType.UNDEFINED;
+            
 
         }
 
