@@ -11,5 +11,11 @@ module config
         public static keyboardManager: managers.Keyboard;
         public static TEXTURE_ATLAS: createjs.SpriteSheet;
         public static CITY_ATLAS: createjs.SpriteSheet;
+        public static SMOKE_ATLAS: createjs.SpriteSheet;
+        public static LIVES:number = 3;
+        public static SCORE: number = 0;
+        public static HIGH_SCORE: number = 0;
+        public static BULLET: number = 10;
+        public static SCORE_BOARD: managers.ScoreBoard;
     }
 }

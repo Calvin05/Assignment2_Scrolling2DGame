@@ -10,9 +10,9 @@ module objects
         // PUBLIC PROPERTIES
 
         // CONSTUCTOR
-        constructor()
+        constructor(name:string = "alien", x:number = 0, y:number= 0, isCentered:boolean = false)
         {
-            super(config.Game.ASSETS.getResult("enemy"), new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, name, x, y, isCentered);
             this.Start();
         }
 

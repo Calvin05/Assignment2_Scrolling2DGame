@@ -18,8 +18,12 @@ var objects;
         __extends(Enemy, _super);
         // PUBLIC PROPERTIES
         // CONSTUCTOR
-        function Enemy() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult("enemy"), new objects.Vector2(), true) || this;
+        function Enemy(name, x, y, isCentered) {
+            if (name === void 0) { name = "alien"; }
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = false; }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, name, x, y, isCentered) || this;
             _this.canFire = true;
             _this._right = true;
             _this.Start();

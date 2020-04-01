@@ -4,7 +4,7 @@ module objects
     {
         
         // constructor
-        constructor(button_name:string = "button", x:number = 0, y:number= 0, isCentered:boolean = false)
+        constructor(button_name:string = "intro", x:number = 0, y:number= 0, isCentered:boolean = false)
         {
             super(config.Game.TEXTURE_ATLAS, button_name, x, y, isCentered);
 
@@ -40,6 +40,7 @@ module objects
          */
         public Start(): void {
             this.name = "Button";
+            this.type = enums.GameObjectType.BUTTON;
         }
 
         public Update(): void {

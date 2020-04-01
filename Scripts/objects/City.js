@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function City() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult("city")) || this;
+            var _this = _super.call(this, config.Game.CITY_ATLAS, "city") || this;
             _this.Start();
             return _this;
         }

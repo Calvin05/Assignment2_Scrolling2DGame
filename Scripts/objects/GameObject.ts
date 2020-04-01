@@ -116,7 +116,7 @@ module objects
         // CONSTRUCTOR
         constructor(sprite_sheet?:createjs.SpriteSheet, frame_name?: string, x?:number, y?:number, centered?:boolean)
         constructor(sprite_sheet:createjs.SpriteSheet, frame_name: string, position: objects.Vector2, centered?: boolean)
-        constructor(first: createjs.SpriteSheet,second: string = "placeholder",  third: Vector2 | number = 0, fourth: boolean | number = 0, fifth:boolean = false)
+        constructor(first: createjs.SpriteSheet,second: string = "start",  third: Vector2 | number = 0, fourth: boolean | number = 0, fifth:boolean = false)
         {
             super(first, second);
 

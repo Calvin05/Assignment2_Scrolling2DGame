@@ -18,15 +18,19 @@ var objects;
         __extends(Live, _super);
         // PUBLIC PROPERTIES
         // CONSTUCTOR
-        function Live() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult("bullet"), new objects.Vector2(), true) || this;
+        function Live(name, x, y, isCentered) {
+            if (name === void 0) { name = "bullet"; }
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = false; }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, name, x, y, isCentered) || this;
             _this._right = true;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
         Live.prototype._checkBounds = function () {
-            if (this.position.x < this.width) {
+            if (this.position.x < 0 - this.width) {
                 this.Reset();
             }
         };
@@ -47,8 +51,8 @@ var objects;
         };
         Live.prototype.Reset = function () {
             // let randomX= util.Mathf.RandomRange(0 + this.halfWidth, config.Game.SCREEN_WIDTH - this.width);
-            var randomY = util.Mathf.RandomRange(0 + this.halfHeight, config.Game.SCREEN_HEIGHT - this.height);
-            this.position = new objects.Vector2(config.Game.SCREEN_WIDTH + this.width, randomY, this);
+            var randomY = util.Mathf.RandomRange(0 + this.width, config.Game.SCREEN_HEIGHT - this.height);
+            this.position = new objects.Vector2(config.Game.SCREEN_WIDTH + this.width + 100, randomY, this);
         };
         Live.prototype.Animation = function () {
             var _this = this;

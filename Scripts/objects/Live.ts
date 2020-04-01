@@ -11,15 +11,15 @@ module objects
         // PUBLIC PROPERTIES
 
         // CONSTUCTOR
-        constructor()
+        constructor(name:string = "bullet", x:number = 0, y:number= 0, isCentered:boolean = false)
         {
-            super(config.Game.ASSETS.getResult("bullet"), new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, name, x, y, isCentered);
             this.Start();
         }
 
         // PRIVATE METHODS
         protected _checkBounds(): void {
-            if (this.position.x < this.width)
+            if (this.position.x < 0 - this.width)
             {
                 this.Reset();
             }
@@ -44,8 +44,8 @@ module objects
         }
         public Reset(): void {
             // let randomX= util.Mathf.RandomRange(0 + this.halfWidth, config.Game.SCREEN_WIDTH - this.width);
-            let randomY = util.Mathf.RandomRange(0 + this.halfHeight, config.Game.SCREEN_HEIGHT - this.height);
-            this.position = new Vector2(config.Game.SCREEN_WIDTH + this.width, randomY, this);
+            let randomY = util.Mathf.RandomRange(0 + this.width, config.Game.SCREEN_HEIGHT - this.height);
+            this.position = new Vector2(config.Game.SCREEN_WIDTH + this.width + 100, randomY, this);
         }
 
         public Animation() {

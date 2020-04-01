@@ -12,20 +12,19 @@ let Game = (function(){
 
     let assets: createjs.LoadQueue;
 
-    let cityAtlas:createjs.SpriteSheet;
+    let textureAtlas: createjs.SpriteSheet;
+    let cityAtlas: createjs.SpriteSheet;
+    let smokeAtlas: createjs.SpriteSheet;
     let assetManifest = 
     [
-        {id:"button", src:"./Assets/images/button.png"},
+        {id:"atlas", src:"./Assets/sprites/atlas.png"},
+        {id:"smokeIm", src:"./Assets/sprites/smokeatlas.png"},
+    
         {id:"placeholder", src:"./Assets/images/placeholder.png"},
         {id:"startButton", src:"./Assets/images/start.png"},
         {id:"introButton", src:"./Assets/images/intro.png"},
-        {id:"nextButton", src:"./Assets/images/nextButton.png"},
-        {id:"backButton", src:"./Assets/images/backButton.png"},
         {id:"city", src:"./Assets/images/city.jpg"},
-        {id:"supe", src:"./Assets/images/sp1.png"},
-        {id:"supe2", src:"./Assets/images/sp2.png"},
-        {id:"supe3", src:"./Assets/images/s3.png"},
-        {id:"supe4", src:"./Assets/images/s4.png"},
+       
         {id:"title", src:"./Assets/images/title.png"},
         {id:"beam", src:"./Assets/images/beam.png"},
         {id:"bullet", src:"./Assets/images/bullet.png"},
@@ -37,6 +36,59 @@ let Game = (function(){
         
     ];
 
+    let spriteData =
+    {
+
+        "images": [
+            "atlas.png"
+        ],
+        
+        "framerate": 20,
+        "frames": [
+            [1, 1, 495, 99, 0, -7, -7],
+            [1, 102, 200, 74, 0, 0, 0],
+            [1, 178, 200, 74, 0, 0, 0],
+            [203, 102, 200, 47, 0, 0, 0],
+            [203, 151, 200, 47, 0, 0, 0],
+            [405, 102, 140, 71, 0, 0, 0],
+            [498, 1, 45, 62, 0, -3, 0],
+            [498, 65, 40, 35, 0, 0, 0],
+            [203, 200, 50, 50, 0, 0, 0],
+            [255, 200, 70, 28, 0, 0, 0],
+            [405, 175, 65, 65, 0, 0, 0],
+            [472, 175, 40, 40, 0, 0, 0],
+            [327, 200, 38, 35, 0, 0, 0],
+            [514, 175, 25, 26, 0, 0, 0],
+            [472, 217, 31, 14, 0, 0, 0]
+        ],
+        
+        "animations": {
+            "title": { "frames": [0] },
+            "intro": { "frames": [1] },
+            "start": { "frames": [2] },
+            "supe1": { "frames": [3,4],
+                        "speed": 0.1 },
+            "alien": { "frames": [5] },
+            "bullet": { "frames": [6] },
+            "star": { "frames": [7] },
+            "shield": { "frames": [8] },
+            "beam3": { "frames": [9] },
+            "placeholder": { "frames": [10] },
+            "beamLabel": { "frames": [11] },
+            "live": { "frames": [12] },
+            "beam2": { "frames": [13] },
+            "beam": { "frames": [14] }
+        },
+        
+        "texturepacker": [
+                "SmartUpdateHash: $TexturePacker:SmartUpdate:953413c90b92a6d3c46efdf594a1cc3c:af6fb2ddb8c373f3d85a3875d972c9b5:cbce6b53f0f49e0bf15173c25c41f876$",
+                "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+        ]
+        
+        }
+        
+        
+        
     let cityData = 
     {
         "images": {},
@@ -47,6 +99,60 @@ let Game = (function(){
             "city": { "frames": [0] },
         }
     }
+
+    let smokeData = 
+    {
+
+        "images": {},
+        
+        
+        "frames": [
+            [0, 0, 200, 200, 0, 100, 100],
+            [200, 0, 200, 200, 0, 100, 100],
+            [400, 0, 200, 200, 0, 100, 100],
+            [600, 0, 200, 200, 0, 100, 100],
+            [800, 0, 200, 200, 0, 100, 100],
+            [0, 200, 200, 200, 0, 100, 100],
+            [200, 200, 200, 200, 0, 100, 100],
+            [400, 200, 200, 200, 0, 100, 100],
+            [600, 200, 200, 200, 0, 100, 100],
+            [800, 200, 200, 200, 0, 100, 100],
+            [0, 400, 200, 200, 0, 100, 100],
+            [200, 400, 200, 200, 0, 100, 100],
+            [400, 400, 200, 200, 0, 100, 100],
+            [600, 400, 200, 200, 0, 100, 100],
+            [800, 400, 200, 200, 0, 100, 100],
+            [0, 600, 200, 200, 0, 100, 100],
+            [200, 600, 200, 200, 0, 100, 100],
+            [400, 600, 200, 200, 0, 100, 100],
+            [600, 600, 200, 200, 0, 100, 100],
+            [800, 600, 200, 200, 0, 100, 100],
+            [0, 800, 200, 200, 0, 100, 100],
+            [200, 800, 200, 200, 0, 100, 100],
+            [400, 800, 200, 200, 0, 100, 100],
+            [600, 800, 200, 200, 0, 100, 100],
+            [800, 800, 200, 200, 0, 100, 100],
+            [0, 1000, 200, 200, 0, 100, 100],
+            [200, 1000, 200, 200, 0, 100, 100],
+            [400, 1000, 200, 200, 0, 100, 100],
+            [600, 1000, 200, 200, 0, 100, 100],
+            [800, 1000, 200, 200, 0, 100, 100],
+            [0, 1200, 200, 200, 0, 100, 100]
+
+        ],
+        
+        "animations": {
+            "smoke": { "frames": [0,1,2,3,4,5,6,7,8,9,
+                                10,11,12,13,14,15,16,17,
+                                18,19,20,21,22,23,24,25,
+                                26,27,28,29,30,31],
+                        "speed": 0.5,
+                        "next": false
+                             }
+        },
+        
+        }
+        
 
     function Preload():void
     {
@@ -74,10 +180,17 @@ let Game = (function(){
         keyboardManager = new managers.Keyboard();
         config.Game.keyboardManager = keyboardManager;
 
-        cityData.images = [assets.getResult("ocean")];
+        spriteData.images = [assets.getResult("atlas")];
+        textureAtlas = new createjs.SpriteSheet(spriteData);
+        config.Game.TEXTURE_ATLAS = textureAtlas;
+
+        cityData.images = [assets.getResult("city")];
         cityAtlas = new createjs.SpriteSheet(cityData);
         config.Game.CITY_ATLAS = cityAtlas;
         
+        smokeData.images = [assets.getResult("smokeIm")];
+        smokeAtlas = new createjs.SpriteSheet(smokeData);
+        config.Game.SMOKE_ATLAS = smokeAtlas;
     }
 
     /**

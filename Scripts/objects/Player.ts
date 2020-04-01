@@ -9,9 +9,9 @@ module objects
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
-        constructor()
+        constructor(name:string = "supe1", x:number = 0, y:number= 0, isCentered:boolean = true)
         {
-            super(config.Game.ASSETS.getResult("supe"), 0, 0, true);
+            super(config.Game.TEXTURE_ATLAS, name, x, y, isCentered);
 
             this.Start();
         }

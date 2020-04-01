@@ -16,8 +16,15 @@ var objects;
 (function (objects) {
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
-        function Image() {
-            return _super !== null && _super.apply(this, arguments) || this;
+        // constructor
+        function Image(button_name, x, y, isCentered) {
+            if (button_name === void 0) { button_name = "beam"; }
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = true; }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, button_name, x, y, isCentered) || this;
+            _this.Start();
+            return _this;
         }
         Image.prototype._checkBounds = function () {
         };

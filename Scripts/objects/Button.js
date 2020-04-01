@@ -18,7 +18,7 @@ var objects;
         __extends(Button, _super);
         // constructor
         function Button(button_name, x, y, isCentered) {
-            if (button_name === void 0) { button_name = "button"; }
+            if (button_name === void 0) { button_name = "intro"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
@@ -47,6 +47,7 @@ var objects;
          */
         Button.prototype.Start = function () {
             this.name = "Button";
+            this.type = enums.GameObjectType.BUTTON;
         };
         Button.prototype.Update = function () {
         };

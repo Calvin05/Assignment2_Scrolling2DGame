@@ -1,0 +1,49 @@
+{
+
+"images": [
+    "atlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [1, 1, 495, 99, 0, -7, -7],
+    [1, 102, 200, 74, 0, 0, 0],
+    [1, 178, 200, 74, 0, 0, 0],
+    [203, 102, 200, 47, 0, 0, 0],
+    [203, 151, 200, 47, 0, 0, 0],
+    [405, 102, 140, 71, 0, 0, 0],
+    [498, 1, 45, 62, 0, -3, 0],
+    [498, 65, 40, 35, 0, 0, 0],
+    [203, 200, 50, 50, 0, 0, 0],
+    [255, 200, 70, 28, 0, 0, 0],
+    [405, 175, 65, 65, 0, 0, 0],
+    [472, 175, 40, 40, 0, 0, 0],
+    [327, 200, 38, 35, 0, 0, 0],
+    [514, 175, 25, 26, 0, 0, 0],
+    [472, 217, 31, 14, 0, 0, 0]
+],
+
+"animations": {
+    "title": { "frames": [0] },
+    "intro": { "frames": [1] },
+    "start": { "frames": [2] },
+    "supe1": { "frames": [3] },
+    "supe2": { "frames": [4] },
+    "alien": { "frames": [5] },
+    "bullet": { "frames": [6] },
+    "star": { "frames": [7] },
+    "shield": { "frames": [8] },
+    "beam3": { "frames": [9] },
+    "placeholder": { "frames": [10] },
+    "beamLabel": { "frames": [11] },
+    "live": { "frames": [12] },
+    "beam2": { "frames": [13] },
+    "beam": { "frames": [14] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:953413c90b92a6d3c46efdf594a1cc3c:af6fb2ddb8c373f3d85a3875d972c9b5:cbce6b53f0f49e0bf15173c25c41f876$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

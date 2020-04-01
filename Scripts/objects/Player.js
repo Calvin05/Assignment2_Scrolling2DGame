@@ -18,8 +18,12 @@ var objects;
         __extends(Player, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Player() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult("supe"), 0, 0, true) || this;
+        function Player(name, x, y, isCentered) {
+            if (name === void 0) { name = "supe1"; }
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = true; }
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, name, x, y, isCentered) || this;
             _this.Start();
             return _this;
         }

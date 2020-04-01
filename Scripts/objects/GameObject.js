@@ -17,7 +17,7 @@ var objects;
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
         function GameObject(first, second, third, fourth, fifth) {
-            if (second === void 0) { second = "placeholder"; }
+            if (second === void 0) { second = "start"; }
             if (third === void 0) { third = 0; }
             if (fourth === void 0) { fourth = 0; }
             if (fifth === void 0) { fifth = false; }
