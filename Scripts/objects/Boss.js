@@ -26,25 +26,15 @@ var objects;
             _this.canFire = true;
             _this._right = true;
             _this._dead = false;
-            _this._live = 10;
+            _this._live = 15;
             _this._dy = 0; //speed
             _this._dx = 0;
-            _this._isActive = false;
+            _this.isActive = false;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Boss.prototype, "isActive", {
-            // PUBLIC PROPERTIES
-            get: function () {
-                return this._isActive;
-            },
-            set: function (v) {
-                this._isActive = v;
-            },
-            enumerable: true,
-            configurable: true
-        });
         Object.defineProperty(Boss.prototype, "live", {
+            // PUBLIC PROPERTIES
             get: function () {
                 return this._live;
             },
@@ -98,7 +88,7 @@ var objects;
             this._checkBounds();
         };
         Boss.prototype.Reset = function () {
-            this.position = new objects.Vector2(1500, 300, this);
+            this.position = new objects.Vector2(1500, 100, this);
         };
         Boss.prototype.canShoot = function () {
             if (!this.isColliding) {

@@ -40,6 +40,7 @@ var scenes;
             this._live = new objects.Live();
             this._scoreBoard = new managers.ScoreBoard();
             this._boss = new objects.Boss();
+            this._bossLive = new objects.Label("0", "15px", "Impact, Charcoal, sans-serif", "#fff", -100, -100, true);
             this.AddEnemies(this._count);
             // createjs.Sound.play("m1");
             this.Main();
@@ -85,7 +86,8 @@ var scenes;
             this.addChild(this._scoreBoard.BulletImage);
             this.addChild(this._scoreBoard.ScoreLabel);
             this.addChild(this._scoreBoard.ScoreImage);
-            // this.addChild(this._boss);
+            this.addChild(this._bossLive);
+            this.addChild(this._boss);
             // this.addChild(this._enemy);
         };
         Play.prototype.FireGun = function (enemy, bullArray) {
@@ -124,21 +126,20 @@ var scenes;
             var _this = this;
             this._bullets.forEach(function (bullet) {
                 _this.BulletSpeed(bullet, 10, 10, false);
-            });
-            this._ememies.forEach(function (enemy) {
-                enemy.addEventListener("tick", function () {
-                    if (enemy.canShoot()) {
-                        var bullet = new objects.Image("beam2", enemy.x + 20, enemy.y + 50, true);
-                        _this._enemybullets.push(bullet);
-                        _this.addChild(bullet);
-                    }
-                });
+                managers.Collision.AABBCheck(_this._boss, bullet);
+                if (bullet.isColliding) {
+                    _this._boss.live--;
+                    _this.BossShieldAnimation(_this._boss.x - 130, _this._boss.y - 145);
+                    createjs.Sound.play("./Assets/audio/electric.wav");
+                    _this.removeChild(bullet);
+                    bullet.position = new objects.Vector2(-200, -200);
+                }
+                ;
             });
             this._enemybullets.forEach(function (bullet) {
                 _this.BulletSpeed(bullet, 10, 10, true);
             });
-            if (this._count <= 0) {
-                this.addChild(this._boss);
+            if (this._count < 1) {
                 this._boss.isActive = true;
             }
             if (this._boss.isActive) {
@@ -206,6 +207,9 @@ var scenes;
                         // Play.point += 100;
                     }
                 });
+                _this._bossLive.x = _this._boss.x + 10;
+                _this._bossLive.y = _this._boss.y - 95;
+                _this._bossLive.text = _this._boss.live.toString();
                 // check collision player and enemies
                 // managers.Collision.Check(enemy, this._player);
                 // if(this._player.isColliding)
@@ -223,87 +227,7 @@ var scenes;
             }
         };
         Play.prototype.ExploreAnimation = function (obX, obY) {
-            // let chopperImg1 = new Image();
-            // let chopperImg2 = new Image();
-            // let chopperImg3 = new Image();
-            // let chopperImg4 = new Image();
-            // let chopperImg5 = new Image();
-            // let chopperImg6 = new Image();
-            // let chopperImg7 = new Image();
-            // let chopperImg8 = new Image();
-            // let chopperImg9 = new Image();
-            // let chopperImg10 = new Image();
-            // let chopperImg11 = new Image();
-            // let chopperImg12 = new Image();
-            // let chopperImg13 = new Image();
-            // let chopperImg14 = new Image();
-            // let chopperImg15 = new Image();
-            // let chopperImg16 = new Image();
-            // let chopperImg17 = new Image();
-            // let chopperImg18 = new Image();
-            // let chopperImg19 = new Image();
-            // let chopperImg20 = new Image();
-            // let chopperImg21 = new Image();
-            // let chopperImg22 = new Image();
-            // let chopperImg23 = new Image();
-            // let chopperImg24 = new Image();
-            // let chopperImg25 = new Image();
-            // let chopperImg26 = new Image();
-            // let chopperImg27 = new Image();
-            // let chopperImg28 = new Image();
-            // let chopperImg29 = new Image();
-            // let chopperImg30 = new Image();
-            // let chopperImg31 = new Image();
             var _this = this;
-            // chopperImg1.src = "./Assets/images/z1.png";
-            // chopperImg2.src = "./Assets/images/z2.png";
-            // chopperImg3.src = "./Assets/images/z3.png";
-            // chopperImg4.src = "./Assets/images/z4.png";
-            // chopperImg5.src = "./Assets/images/z5.png";
-            // chopperImg6.src = "./Assets/images/z6.png";
-            // chopperImg7.src = "./Assets/images/z7.png";
-            // chopperImg8.src = "./Assets/images/z8.png";
-            // chopperImg9.src = "./Assets/images/z9.png";
-            // chopperImg10.src = "./Assets/images/z10.png";
-            // chopperImg11.src = "./Assets/images/z11.png";
-            // chopperImg12.src = "./Assets/images/z12.png";
-            // chopperImg13.src = "./Assets/images/z13.png";
-            // chopperImg14.src = "./Assets/images/z14.png";
-            // chopperImg15.src = "./Assets/images/z15.png";
-            // chopperImg16.src = "./Assets/images/z16.png";
-            // chopperImg17.src = "./Assets/images/z17.png";
-            // chopperImg18.src = "./Assets/images/z18.png";
-            // chopperImg19.src = "./Assets/images/z19.png";
-            // chopperImg20.src = "./Assets/images/z20.png";
-            // chopperImg21.src = "./Assets/images/z21.png";
-            // chopperImg22.src = "./Assets/images/z22.png";
-            // chopperImg23.src = "./Assets/images/z23.png";
-            // chopperImg24.src = "./Assets/images/z24.png";
-            // chopperImg25.src = "./Assets/images/z25.png";
-            // chopperImg26.src = "./Assets/images/z26.png";
-            // chopperImg27.src = "./Assets/images/z27.png";
-            // chopperImg28.src = "./Assets/images/z28.png";
-            // chopperImg29.src = "./Assets/images/z29.png";
-            // chopperImg30.src = "./Assets/images/z30.png";
-            // chopperImg31.src = "./Assets/images/z31.png";
-            //     let spriteSheet = new createjs.SpriteSheet({
-            //         images: [ chopperImg1, chopperImg2, chopperImg3, chopperImg4, chopperImg5,
-            //             chopperImg6,chopperImg7, chopperImg8, chopperImg9, chopperImg10, 
-            //             chopperImg11, chopperImg12, chopperImg13, chopperImg14, chopperImg15, chopperImg16,
-            //             chopperImg17, chopperImg18, chopperImg19, chopperImg20, chopperImg21,
-            //             chopperImg22, chopperImg23, chopperImg24, chopperImg25, chopperImg26, chopperImg27,
-            //             chopperImg28, chopperImg29, chopperImg30, chopperImg31],
-            //         frames: { width: 200, height: 200, count: 32},
-            //         animations: {
-            //             explore: [0, 31, false]
-            //         }
-            //     });
-            //     let animation = new createjs.Sprite(spriteSheet);
-            //     animation.x = obX-100;
-            //     animation.y = obY-60;
-            //     animation.spriteSheet.getAnimation('explore').speed = 0.8;
-            //     animation.gotoAndPlay('explore');
-            //     this.addChild(animation);
             var SpriteSheet = config.Game.SMOKE_ATLAS;
             var smoke = new createjs.Sprite(SpriteSheet);
             smoke.x = obX;
@@ -312,6 +236,18 @@ var scenes;
             this.addChild(smoke);
             setTimeout(function () {
                 _this.removeChild(smoke);
+            }, 900);
+        };
+        Play.prototype.BossShieldAnimation = function (obX, obY) {
+            var _this = this;
+            var SpriteSheet = config.Game.TEXTURE_ATLAS;
+            var shield = new createjs.Sprite(SpriteSheet);
+            shield.x = obX;
+            shield.y = obY;
+            shield.gotoAndPlay("e1");
+            this.addChild(shield);
+            setTimeout(function () {
+                _this.removeChild(shield);
             }, 900);
         };
         return Play;

@@ -8,18 +8,11 @@ module objects
         private canFire: boolean = true;
         private _right:boolean = true;
         private _dead : boolean = false;
-        private _live : number = 10;
+        private _live : number = 15;
         private _dy: number =0; //speed
         private _dx:number =0;
-        private _isActive : boolean = false;
+     
         // PUBLIC PROPERTIES
-       
-        public get isActive() : boolean {
-            return this._isActive;
-        }
-        public set isActive(v : boolean) {
-            this._isActive = v;
-        }
         
         public get live() : number {
             return this._live;
@@ -40,6 +33,7 @@ module objects
         constructor(name:string = "boss1", x:number = 0, y:number= 0, isCentered:boolean = true)
         {
             super(config.Game.TEXTURE_ATLAS, name, x, y, isCentered);
+            this.isActive = false;
             this.Start();
         }
 
@@ -85,7 +79,7 @@ module objects
         }
         public Reset(): void {
            
-            this.position = new Vector2(1500, 300, this)
+            this.position = new Vector2(1500, 100, this)
         }
 
         public canShoot(): boolean
