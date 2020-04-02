@@ -93,6 +93,10 @@ module managers
         }
 
         public get Bullet() : number {
+            if(this._bullet < 0) 
+            {
+                this._bullet = 0;
+            }
             return this._bullet;
         }
         public set Bullet(v : number) {

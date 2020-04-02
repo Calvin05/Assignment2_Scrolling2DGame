@@ -112,6 +112,9 @@ var managers;
         });
         Object.defineProperty(ScoreBoard.prototype, "Bullet", {
             get: function () {
+                if (this._bullet < 0) {
+                    this._bullet = 0;
+                }
                 return this._bullet;
             },
             set: function (v) {

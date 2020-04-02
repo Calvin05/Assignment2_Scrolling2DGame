@@ -7,8 +7,18 @@ module objects
         private _horizontalSpeed:number;
         private canFire: boolean = true;
         private _right:boolean = true;
+        private _dead : boolean = false;
         // PUBLIC PROPERTIES
 
+        
+        
+        public get Dead() : boolean {
+            return this._dead;
+        }
+        public set Dead(v : boolean) {
+            this._dead = v;
+        }
+        
         // CONSTUCTOR
         constructor(name:string = "alien", x:number = 0, y:number= 0, isCentered:boolean = false)
         {
@@ -20,7 +30,11 @@ module objects
         protected _checkBounds(): void {
             if (this.position.x < -this.width)
             {
-                this.Reset();
+                if(!this.Dead)
+                {
+                    this.Reset();
+                }
+               
             }
         } 
 

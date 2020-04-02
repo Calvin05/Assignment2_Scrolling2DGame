@@ -16,7 +16,6 @@ var objects;
 (function (objects) {
     var Enemy = /** @class */ (function (_super) {
         __extends(Enemy, _super);
-        // PUBLIC PROPERTIES
         // CONSTUCTOR
         function Enemy(name, x, y, isCentered) {
             if (name === void 0) { name = "alien"; }
@@ -26,13 +25,27 @@ var objects;
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, name, x, y, isCentered) || this;
             _this.canFire = true;
             _this._right = true;
+            _this._dead = false;
             _this.Start();
             return _this;
         }
+        Object.defineProperty(Enemy.prototype, "Dead", {
+            // PUBLIC PROPERTIES
+            get: function () {
+                return this._dead;
+            },
+            set: function (v) {
+                this._dead = v;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PRIVATE METHODS
         Enemy.prototype._checkBounds = function () {
             if (this.position.x < -this.width) {
-                this.Reset();
+                if (!this.Dead) {
+                    this.Reset();
+                }
             }
         };
         Enemy.prototype._move = function () {

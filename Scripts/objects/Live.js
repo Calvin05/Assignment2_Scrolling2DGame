@@ -50,9 +50,9 @@ var objects;
             this.Animation();
         };
         Live.prototype.Reset = function () {
-            // let randomX= util.Mathf.RandomRange(0 + this.halfWidth, config.Game.SCREEN_WIDTH - this.width);
+            var randomX = util.Mathf.RandomRange(config.Game.SCREEN_WIDTH + this.width + 100, config.Game.SCREEN_WIDTH + this.width + 300);
             var randomY = util.Mathf.RandomRange(0 + this.width, config.Game.SCREEN_HEIGHT - this.height);
-            this.position = new objects.Vector2(config.Game.SCREEN_WIDTH + this.width + 100, randomY, this);
+            this.position = new objects.Vector2(randomX, randomY, this);
         };
         Live.prototype.Animation = function () {
             var _this = this;
