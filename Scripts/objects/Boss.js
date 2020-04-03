@@ -114,6 +114,7 @@ var objects;
                 this._backgroundSound = createjs.Sound.play("backgroundMusic");
                 this._backgroundSound.loop = -1; // loop forever
                 this._backgroundSound.volume = 0.7;
+                createjs.Sound.play("laugh");
                 this._play = false;
             }
         };

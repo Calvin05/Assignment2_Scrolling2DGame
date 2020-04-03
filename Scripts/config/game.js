@@ -12,6 +12,7 @@ var config;
         Game.SCORE = 0;
         Game.HIGH_SCORE = 0;
         Game.BULLET = 10;
+        Game.MESSAGE = " ";
         return Game;
     }());
     config.Game = Game;

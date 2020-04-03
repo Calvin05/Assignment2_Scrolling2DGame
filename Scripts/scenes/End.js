@@ -29,8 +29,8 @@ var scenes;
         End.prototype.Start = function () {
             this._city = new objects.City();
             this._highScoreImage = new objects.Image("highscore", 600, 190, true);
-            this._playerScore = new objects.Label("Your Score: " + config.Game.SCORE, "40px", "Impact, Charcoal, sans-serif", "#ffffff", 560, 400, true);
-            this._playerScoreImage = new objects.Image("playerscore", 720, 400, true);
+            this._playerScore = new objects.Label("Your Score: " + config.Game.SCORE, "40px", "Impact, Charcoal, sans-serif", "#ffffff", 430, 390, false);
+            this._playerScoreImage = new objects.Image("playerscore", 735, 400, true);
             //instantiate a new Text object
             // buttons
             this._backButton = new objects.Button("start", 600, 530, true);

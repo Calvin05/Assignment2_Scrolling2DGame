@@ -25,7 +25,7 @@ var scenes;
             _this.shield = true;
             _this.cheat = true;
             _this._random = 1000;
-            _this._count = 5;
+            _this._count = 7;
             _this._shield = 3;
             _this.Start();
             return _this;

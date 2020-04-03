@@ -17,5 +17,6 @@ module config
         public static HIGH_SCORE: number = 0;
         public static BULLET: number = 10;
         public static SCORE_BOARD: managers.ScoreBoard;
+        public static MESSAGE: string = " ";
     }
 }

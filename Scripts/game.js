@@ -35,7 +35,8 @@ var Game = (function () {
         { id: "wind", src: "./Assets/audio/wind.wav" },
         { id: "shieldSound", src: "./Assets/audio/shieldSound.mp3" },
         { id: "backgroundMusic", src: "./Assets/audio/backgroundMusic.wav" },
-        { id: "power", src: "./Assets/audio/PowerUp.wav" }
+        { id: "power", src: "./Assets/audio/PowerUp.wav" },
+        { id: "laugh", src: "./Assets/audio/laugh.mp3" }
     ];
     var spriteData = {
         "images": {},

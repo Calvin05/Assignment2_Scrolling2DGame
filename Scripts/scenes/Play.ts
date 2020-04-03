@@ -16,7 +16,7 @@ module scenes
         private _boss:objects.Boss;
         private _scoreBoard:managers.ScoreBoard;
         private _random:number = 1000;
-        private _count:number = 5;
+        private _count:number = 7;
         private _bossLive:objects.Label;
         private _shield: number = 3;
         
