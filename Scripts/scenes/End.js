@@ -27,20 +27,33 @@ var scenes;
         // PUBLIC METHODS
         // Initializing and Instantiating
         End.prototype.Start = function () {
+            this._city = new objects.City();
+            this._highScoreImage = new objects.Image("highscore", 600, 190, true);
+            this._playerScore = new objects.Label("Your Score: " + config.Game.SCORE, "40px", "Impact, Charcoal, sans-serif", "#ffffff", 560, 400, true);
+            this._playerScoreImage = new objects.Image("playerscore", 720, 400, true);
             //instantiate a new Text object
-            this._endLabel = new objects.Label("End Scene", "80px", "Consolas", "#FFFF00", 320, 180, true);
             // buttons
-            this._backButton = new objects.Button("start", 320, 430, true);
+            this._backButton = new objects.Button("start", 600, 530, true);
+            this._scoreboard = new managers.ScoreBoard();
             this.Main();
         };
         End.prototype.Update = function () {
+            this._city.Update();
         };
         End.prototype.Main = function () {
+            this.addChild(this._city);
             this.addChild(this._endLabel);
             this.addChild(this._backButton);
+            this.addChild(this._scoreboard.HighScoreLabel);
             this._backButton.on("click", function () {
                 config.Game.SCENE = scenes.State.PLAY;
+                config.Game.LIVES = 3;
+                config.Game.BULLET = 10;
+                config.Game.SCORE = 0;
             });
+            this.addChild(this._highScoreImage);
+            this.addChild(this._playerScore);
+            this.addChild(this._playerScoreImage);
         };
         return End;
     }(objects.Scene));

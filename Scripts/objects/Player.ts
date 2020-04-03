@@ -5,9 +5,12 @@ module objects
         // PRIVATE INSTANCE MEMBERS
         private _verticalPosition:number;
         private _horizontalPosition:number;
-
+        private _flySound : createjs.AbstractSoundInstance;
         // PUBLIC PROPERTIES
-
+        public get FlySound() : createjs.AbstractSoundInstance 
+        {
+            return this._flySound;
+        }
         // CONSTRUCTOR
         constructor(name:string = "supe1", x:number = 0, y:number= 0, isCentered:boolean = true)
         {
@@ -73,6 +76,9 @@ module objects
            
             this.x = 120;
             this.y = 300;
+            this._flySound = createjs.Sound.play("wind");
+            this._flySound.loop = -1; // loop forever
+            this._flySound.volume = 0.5; 
         }
 
         public Update(): void 

@@ -60,7 +60,6 @@ var objects;
         Enemy.prototype.Update = function () {
             this._move();
             this._checkBounds();
-            this.Animation();
         };
         Enemy.prototype.Reset = function () {
             // this._verticalSpeed = util.Mathf.RandomRange(5,10);
@@ -83,23 +82,6 @@ var objects;
                 }
             }
             return false;
-        };
-        Enemy.prototype.Animation = function () {
-            var _this = this;
-            this.addEventListener("tick", function () {
-                var tick = createjs.Ticker.getTicks();
-                // console.log("debug tick : " + i);
-                if (tick % 30 == 0) {
-                    if (_this._right) {
-                        _this.rotation += util.Mathf.RandomRange(9.9, 10);
-                        _this._right = false;
-                    }
-                    else {
-                        _this.rotation -= util.Mathf.RandomRange(9.9, 10);
-                        _this._right = true;
-                    }
-                }
-            });
         };
         return Enemy;
     }(objects.GameObject));

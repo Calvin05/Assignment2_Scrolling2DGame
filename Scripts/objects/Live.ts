@@ -11,7 +11,7 @@ module objects
         // PUBLIC PROPERTIES
 
         // CONSTUCTOR
-        constructor(name:string = "bullet", x:number = 0, y:number= 0, isCentered:boolean = false)
+        constructor(name:string = "laser", x:number = 0, y:number= 0, isCentered:boolean = false)
         {
             super(config.Game.TEXTURE_ATLAS, name, x, y, isCentered);
             this.Start();
@@ -23,12 +23,12 @@ module objects
             {
                 this.Reset();
             }
-        } 
-
+        }
+        
         private _move():void 
         {
             // this.position = Vector2.add(this.position, this.velocity);
-            this.position = Vector2.subtract(this.position, this.velocity );
+            this.position = Vector2.subtract(this.position, this.velocity);
         }
 
         // PUBLIC METHODS
@@ -38,31 +38,16 @@ module objects
             this.Reset();
         }
         public Update(): void {
+            this.rotation += 5;
             this._move();
             this._checkBounds();
-            this.Animation();
+           
         }
         public Reset(): void {
             let randomX= util.Mathf.RandomRange(config.Game.SCREEN_WIDTH + this.width + 100, config.Game.SCREEN_WIDTH + this.width + 300);
             let randomY = util.Mathf.RandomRange(0 + this.width, config.Game.SCREEN_HEIGHT - this.height);
             
             this.position = new Vector2(randomX, randomY, this);
-        }
-
-        public Animation() {
-            this.addEventListener("tick", () => {
-                let tick = createjs.Ticker.getTicks();
-                // console.log("debug tick : " + i);
-                if(tick % 10 == 0) {
-                    if(this._right) {
-                        this.rotation += 10;
-                        this._right = false;
-                    } else {
-                        this.rotation -= 10;
-                        this._right = true;
-                    }
-                }
-            })
         }
 
     }

@@ -22,8 +22,11 @@ var scenes;
             var _this = _super.call(this) || this;
             // private _enemy:objects.Enemy;
             _this.fire = true;
+            _this.shield = true;
+            _this.cheat = true;
             _this._random = 1000;
             _this._count = 5;
+            _this._shield = 3;
             _this.Start();
             return _this;
         }
@@ -75,6 +78,7 @@ var scenes;
             if (this._boss.isActive) {
                 this._boss.Update();
             }
+            this.WinOrLoseCondition();
         };
         Play.prototype.Main = function () {
             this.addChild(this._city);
@@ -95,7 +99,7 @@ var scenes;
             if (enemy.canShoot()) {
                 var fire_1 = setInterval(function () {
                     if (!enemy.isColliding) {
-                        var bullet = new objects.Image("beam2", enemy.x, enemy.y, true);
+                        var bullet = new objects.Image("beam2", enemy.x, enemy.y + 30, true);
                         bullArray.push(bullet);
                         _this.addChild(bullet);
                     }
@@ -121,6 +125,30 @@ var scenes;
             if (!config.Game.keyboardManager.fire) {
                 this.fire = true;
             }
+            if (config.Game.keyboardManager.shield) {
+                if (this.shield) {
+                    if (this._shield > 0) {
+                        this.playerShield();
+                        this._shield--;
+                        this.shield = false;
+                        createjs.Sound.play("shieldSound");
+                    }
+                }
+            }
+            if (!config.Game.keyboardManager.shield) {
+                this.shield = true;
+            }
+            if (config.Game.keyboardManager.cheat) {
+                if (this.cheat) {
+                    this.cheat = false;
+                    createjs.Sound.play("power");
+                    this._scoreBoard.Lives += 5;
+                    this._scoreBoard.Bullet += 10;
+                }
+            }
+            if (!config.Game.keyboardManager.cheat) {
+                this.cheat = true;
+            }
         };
         Play.prototype.UpdateBullets = function () {
             var _this = this;
@@ -128,11 +156,19 @@ var scenes;
                 _this.BulletSpeed(bullet, 10, 10, false);
                 managers.Collision.AABBCheck(_this._boss, bullet);
                 if (bullet.isColliding) {
-                    _this._boss.live--;
-                    _this.BossShieldAnimation(_this._boss.x - 130, _this._boss.y - 145);
-                    createjs.Sound.play("./Assets/audio/electric.wav");
-                    _this.removeChild(bullet);
-                    bullet.position = new objects.Vector2(-200, -200);
+                    if (_this._boss.live > 1) {
+                        _this._boss.live--;
+                        _this.BossShieldAnimation(_this._boss.x - 130, _this._boss.y - 145);
+                        createjs.Sound.play("electric");
+                        _this.removeChild(bullet);
+                        bullet.position = new objects.Vector2(-200, -200);
+                    }
+                    else {
+                        _this._boss.live--;
+                        _this.ExploreAnimation(_this._boss.x, _this._boss.y);
+                        createjs.Sound.play("smoke");
+                        // this._boss.live--;
+                    }
                 }
                 ;
             });
@@ -146,13 +182,19 @@ var scenes;
                 if (createjs.Ticker.getTicks() % 60 == 0) {
                     this._random = Math.round(util.Mathf.RandomRange(20, 100));
                 }
-                console.log("debug: " + this._random);
                 if (createjs.Ticker.getTicks() % this._random == 0) {
                     if (!this._boss.isColliding) {
-                        var bullet1 = new objects.Image("beam3", this._boss.x + 10, this._boss.y - 40, true);
+                        var bullet1 = new objects.Image("fire1", this._boss.x + 10, this._boss.y - 40, true);
                         this._enemybullets.push(bullet1);
-                        this.BulletSpeed(bullet1, 10, 10, true);
+                        createjs.Sound.play("fireSound");
+                        this.BulletSpeed(bullet1, 20, 20, true);
                         this.addChild(bullet1);
+                        //    this.BeamShooting(this._boss.x, this._boss.y);
+                    }
+                }
+                if (this._boss.live < 8) {
+                    if (createjs.Ticker.getTicks() % (this._random * 3) == 0) {
+                        this.BeamShooting(this._boss.x, this._boss.y);
                     }
                 }
             }
@@ -185,6 +227,7 @@ var scenes;
                     managers.Collision.AABBCheck(_this._supe, bullet);
                     if (bullet.isColliding) {
                         _this._scoreBoard.Lives--;
+                        createjs.Sound.play("hit");
                         bullet.position = new objects.Vector2(-200, -200);
                         _this.removeChild(bullet);
                     }
@@ -210,20 +253,12 @@ var scenes;
                 _this._bossLive.x = _this._boss.x + 10;
                 _this._bossLive.y = _this._boss.y - 95;
                 _this._bossLive.text = _this._boss.live.toString();
-                // check collision player and enemies
-                // managers.Collision.Check(enemy, this._player);
-                // if(this._player.isColliding)
-                // {
-                //     console.log("debug: Player collision");
-                //     //createjs.Sound.play("./Assets/sounds/crash.wav");
-                //     //config.Game.SCENE_STATE = scenes.State.END;
-                //     //createjs.Sound.stop();//
-                // }
             });
             managers.Collision.AABBCheck(this._supe, this._live);
             if (this._live.isColliding) {
                 this._live.Reset();
                 this._scoreBoard.Bullet++;
+                createjs.Sound.play("bulletSound");
             }
         };
         Play.prototype.ExploreAnimation = function (obX, obY) {
@@ -249,6 +284,63 @@ var scenes;
             setTimeout(function () {
                 _this.removeChild(shield);
             }, 900);
+        };
+        Play.prototype.BeamShooting = function (obX, obY) {
+            var _this = this;
+            var bullet1 = new objects.Image("beam3", obX, obY - 100, true);
+            this.addChild(bullet1);
+            var createBeam = setInterval(function () {
+                _this._enemybullets.push(bullet1);
+                // createjs.Sound.play("./Assets/audio/beam2.wav");
+                _this.BulletSpeed(bullet1, 30, 30, true);
+            }, 500);
+            createjs.Sound.play("beam2");
+            var bullet2 = new objects.Image("beam3", obX, obY + 100, true);
+            this.addChild(bullet2);
+            var createBeam2 = setInterval(function () {
+                _this._enemybullets.push(bullet2);
+                // createjs.Sound.play("./Assets/audio/beam2.wav");
+                _this.BulletSpeed(bullet2, 30, 30, true);
+            }, 800);
+        };
+        Play.prototype.playerShield = function () {
+            var _this = this;
+            this._enemybullets.forEach(function (bullet) {
+                _this.removeChild(bullet);
+                bullet.position = new objects.Vector2(-400, -400);
+            });
+            var SpriteSheet = config.Game.TEXTURE_ATLAS;
+            var shield = new createjs.Sprite(SpriteSheet);
+            shield.x = this._supe.x - 100;
+            shield.y = this._supe.y - 200;
+            shield.gotoAndPlay("circle1");
+            this.addChild(shield);
+            setTimeout(function () {
+                _this.removeChild(shield);
+            }, 500);
+        };
+        Play.prototype.WinOrLoseCondition = function () {
+            if (this._boss.live < 1) {
+                config.Game.SCORE += 500 + (50 * config.Game.BULLET) + (100 * config.Game.LIVES);
+                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+                this.removesound();
+                config.Game.SCENE = scenes.State.END;
+            }
+            if (config.Game.LIVES < 1) {
+                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+                this.removesound();
+                config.Game.SCENE = scenes.State.END;
+            }
+        };
+        Play.prototype.removesound = function () {
+            this._supe.FlySound.stop();
+            if (this._boss.isActive) {
+                this._boss.BackgroundSound.stop();
+            }
         };
         return Play;
     }(objects.Scene));

@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTUCTOR
         function Live(name, x, y, isCentered) {
-            if (name === void 0) { name = "bullet"; }
+            if (name === void 0) { name = "laser"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
@@ -45,31 +45,14 @@ var objects;
             this.Reset();
         };
         Live.prototype.Update = function () {
+            this.rotation += 5;
             this._move();
             this._checkBounds();
-            this.Animation();
         };
         Live.prototype.Reset = function () {
             var randomX = util.Mathf.RandomRange(config.Game.SCREEN_WIDTH + this.width + 100, config.Game.SCREEN_WIDTH + this.width + 300);
             var randomY = util.Mathf.RandomRange(0 + this.width, config.Game.SCREEN_HEIGHT - this.height);
             this.position = new objects.Vector2(randomX, randomY, this);
-        };
-        Live.prototype.Animation = function () {
-            var _this = this;
-            this.addEventListener("tick", function () {
-                var tick = createjs.Ticker.getTicks();
-                // console.log("debug tick : " + i);
-                if (tick % 10 == 0) {
-                    if (_this._right) {
-                        _this.rotation += 10;
-                        _this._right = false;
-                    }
-                    else {
-                        _this.rotation -= 10;
-                        _this._right = true;
-                    }
-                }
-            });
         };
         return Live;
     }(objects.GameObject));

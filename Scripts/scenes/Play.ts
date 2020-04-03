@@ -8,6 +8,8 @@ module scenes
         private _bullets:Array<objects.Image>;
         // private _enemy:objects.Enemy;
         private fire = true;
+        private shield = true;
+        private cheat = true;
         private _ememies:objects.Enemy[];
         private _enemybullets: Array<objects.Image>;
         private _live:objects.Live;
@@ -16,6 +18,8 @@ module scenes
         private _random:number = 1000;
         private _count:number = 5;
         private _bossLive:objects.Label;
+        private _shield: number = 3;
+        
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
@@ -80,7 +84,7 @@ module scenes
             if(this._boss.isActive) {
                 this._boss.Update();
             }
-           
+           this.WinOrLoseCondition();
         }
         
         public Main(): void 
@@ -107,7 +111,7 @@ module scenes
                         let fire = setInterval(()=>{
                             if(!enemy.isColliding)
                             {
-                                let bullet = new objects.Image("beam2", enemy.x, enemy.y, true);
+                                let bullet = new objects.Image("beam2", enemy.x, enemy.y + 30, true);
                                 bullArray.push(bullet);
                                 this.addChild(bullet);
                             }
@@ -134,6 +138,36 @@ module scenes
                 this.fire = true;
             }
             
+            if(config.Game.keyboardManager.shield) {
+                if(this.shield) 
+                {
+                    if(this._shield > 0) 
+                    {
+                        this.playerShield();
+                        this._shield--;
+                        this.shield = false;
+                        createjs.Sound.play("shieldSound");
+                    }
+                }
+            }
+            if(!config.Game.keyboardManager.shield) {
+                this.shield = true;
+            }
+            
+            if(config.Game.keyboardManager.cheat) {
+                if(this.cheat) 
+                {
+                    this.cheat = false;
+                    createjs.Sound.play("power");
+                    this._scoreBoard.Lives += 5;
+                    this._scoreBoard.Bullet += 10;
+                    
+                }
+            }
+            if(!config.Game.keyboardManager.cheat) {
+                this.cheat = true;
+            }
+
         }
 
         public UpdateBullets() {
@@ -141,11 +175,21 @@ module scenes
                 this.BulletSpeed(bullet, 10, 10, false);
                 managers.Collision.AABBCheck(this._boss, bullet)
                 if(bullet.isColliding) {
-                    this._boss.live--;
-                    this.BossShieldAnimation(this._boss.x - 130, this._boss.y - 145);
-                    createjs.Sound.play("./Assets/audio/electric.wav")
-                    this.removeChild(bullet);
-                    bullet.position = new objects.Vector2(-200,-200);
+                    if(this._boss.live > 1) {
+                        this._boss.live--;
+                        this.BossShieldAnimation(this._boss.x - 130, this._boss.y - 145);
+                        createjs.Sound.play("electric")
+                        this.removeChild(bullet);
+                        bullet.position = new objects.Vector2(-200,-200);
+                    } 
+                    else 
+                    {
+                        this._boss.live--;
+                        this.ExploreAnimation(this._boss.x, this._boss.y);
+                        createjs.Sound.play("smoke");
+                        // this._boss.live--;
+                    }
+                    
                 };
             })
            
@@ -162,17 +206,26 @@ module scenes
                     this._random = Math.round(util.Mathf.RandomRange(20, 100));
                }
                
-               console.log("debug: " +  this._random);
                if(createjs.Ticker.getTicks() %  this._random == 0) {
                    if(!this._boss.isColliding)
-                       {
-                           let bullet1 = new objects.Image("beam3", this._boss.x+10, this._boss.y - 40, true);
+                    {
+                           let bullet1 = new objects.Image("fire1", this._boss.x+10, this._boss.y - 40, true);
                            this._enemybullets.push(bullet1);
-                           this.BulletSpeed(bullet1, 10, 10, true);
+                           createjs.Sound.play("fireSound");
+                           this.BulletSpeed(bullet1, 20, 20, true);
                            this.addChild(bullet1);
-                          
-                       }
+                        //    this.BeamShooting(this._boss.x, this._boss.y);
+                           
+                    }
                }
+               if(this._boss.live < 8) 
+               {
+                    if(createjs.Ticker.getTicks() % (this._random * 3) == 0) {
+                
+                        this.BeamShooting(this._boss.x, this._boss.y);
+                    }
+               }
+              
             }
             
             
@@ -208,6 +261,7 @@ module scenes
                     managers.Collision.AABBCheck(this._supe, bullet);
                     if(bullet.isColliding) {
                         this._scoreBoard.Lives--;
+                        createjs.Sound.play("hit")
                         bullet.position = new objects.Vector2(-200,-200);
                         this.removeChild(bullet);
                    
@@ -219,7 +273,6 @@ module scenes
                         this.ExploreAnimation(enemy.x, enemy.y);
                         createjs.Sound.play("smoke");
                         this._count--;
-                        
                         // this.ExploreAnimation(enemy.x, enemy.y);
                         // createjs.Sound.play("./Assets/sounds/crash.wav");
                         enemy.Dead = true;
@@ -236,15 +289,6 @@ module scenes
             this._bossLive.x = this._boss.x + 10;
             this._bossLive.y = this._boss.y - 95;
             this._bossLive.text = this._boss.live.toString();
-            // check collision player and enemies
-            // managers.Collision.Check(enemy, this._player);
-            // if(this._player.isColliding)
-            // {
-            //     console.log("debug: Player collision");
-            //     //createjs.Sound.play("./Assets/sounds/crash.wav");
-            //     //config.Game.SCENE_STATE = scenes.State.END;
-            //     //createjs.Sound.stop();//
-            // }
 
             });
             
@@ -253,6 +297,7 @@ module scenes
             {
                 this._live.Reset();
                 this._scoreBoard.Bullet++;
+                createjs.Sound.play("bulletSound");
             }
         }
 
@@ -284,5 +329,77 @@ module scenes
                 this.removeChild(shield);
             }, 900); 
         }
+
+        public BeamShooting(obX:number, obY:number)
+        {
+           
+            let bullet1 = new objects.Image("beam3", obX, obY - 100, true);
+            this.addChild(bullet1);
+            let createBeam = setInterval(()=>{
+                this._enemybullets.push(bullet1);
+               
+                // createjs.Sound.play("./Assets/audio/beam2.wav");
+                this.BulletSpeed(bullet1, 30, 30, true);
+            }, 500)
+            createjs.Sound.play("beam2");
+            let bullet2 = new objects.Image("beam3", obX, obY + 100, true);
+            this.addChild(bullet2);
+            let createBeam2 = setInterval(()=>{
+                this._enemybullets.push(bullet2);
+                
+                // createjs.Sound.play("./Assets/audio/beam2.wav");
+                this.BulletSpeed(bullet2, 30, 30, true);
+            }, 800)
+         
+        }
+
+        public playerShield() {    
+            this._enemybullets.forEach((bullet) => {
+                this.removeChild(bullet);
+                bullet.position = new objects.Vector2(-400,-400);
+            });
+            let SpriteSheet = config.Game.TEXTURE_ATLAS;
+            let shield = new createjs.Sprite(SpriteSheet);
+            
+            shield.x = this._supe.x - 100;
+            shield.y = this._supe.y - 200;
+            shield.gotoAndPlay("circle1");
+            this.addChild(shield);
+            setTimeout(() => {
+                this.removeChild(shield);
+            }, 500); 
+        }
+
+        public WinOrLoseCondition()
+        {
+            if(this._boss.live < 1) {
+                config.Game.SCORE += 500 + (50 * config.Game.BULLET) + (100 * config.Game.LIVES);
+                
+                if(config.Game.SCORE > config.Game.HIGH_SCORE)
+                {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+                this.removesound()
+                config.Game.SCENE = scenes.State.END;
+            }
+
+            if(config.Game.LIVES < 1) {
+                if(config.Game.SCORE > config.Game.HIGH_SCORE)
+                {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+                this.removesound();
+                config.Game.SCENE = scenes.State.END;
+            }
+        }
+
+        public removesound() {
+            this._supe.FlySound.stop();
+            if(this._boss.isActive) {
+                this._boss.BackgroundSound.stop();
+            }
+           
+        }
+
     }
 }

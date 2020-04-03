@@ -93,10 +93,7 @@ module managers
         }
 
         public get Bullet() : number {
-            if(this._bullet < 0) 
-            {
-                this._bullet = 0;
-            }
+            
             return this._bullet;
         }
         public set Bullet(v : number) {
@@ -122,8 +119,7 @@ module managers
             this._livesLabel = new objects.Label("3", "25px", "Impact, Charcoal, sans-serif", "#fff", 50, 30, true);
             this._scoreLabel = new objects.Label("0", "25px", "Impact, Charcoal, sans-serif", "#ffffff", 247, 30, true);
             this._bulletLabel = new objects.Label(" : 10", "25px", "Impact, Charcoal, sans-serif", "#ffffff", 160, 30, true);
-            
-            this._highScoreLabel = new objects.Label("0", "25px", "Impact, Charcoal, sans-serif", "#ffffff", 320, 30, true);
+            this._highScoreLabel = new objects.Label("0", "70px", "Impact, Charcoal, sans-serif", "#ffffff", 600, 50, true);
             this.Lives = config.Game.LIVES;
             this.Score = config.Game.SCORE;
             this.HighScore = config.Game.HIGH_SCORE;

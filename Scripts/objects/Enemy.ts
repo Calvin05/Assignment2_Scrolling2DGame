@@ -52,7 +52,7 @@ module objects
         public Update(): void {
             this._move();
             this._checkBounds();
-            this.Animation();
+           
         }
         public Reset(): void {
             // this._verticalSpeed = util.Mathf.RandomRange(5,10);
@@ -77,22 +77,6 @@ module objects
                 }
             }
             return false;
-        }
-
-        public Animation() {
-            this.addEventListener("tick", () => {
-                let tick = createjs.Ticker.getTicks();
-                // console.log("debug tick : " + i);
-                if(tick % 30 == 0) {
-                    if(this._right) {
-                        this.rotation += util.Mathf.RandomRange(9.9, 10);
-                        this._right = false;
-                    } else {
-                        this.rotation -= util.Mathf.RandomRange(9.9, 10);
-                        this._right = true;
-                    }
-                }
-            })
         }
 
     }

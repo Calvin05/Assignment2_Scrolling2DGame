@@ -59,6 +59,10 @@ module scenes
             this._startButton.on("click", ()=>{
                 config.Game.SCENE = scenes.State.PLAY;
             });
+
+            this._introButton.on("click", ()=>{
+                config.Game.SCENE = scenes.State.INTRO;
+            });
             
               
                 // this.ShieldAnimation(this._supe.x, this._supe.y);

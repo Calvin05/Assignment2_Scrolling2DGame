@@ -16,7 +16,6 @@ var objects;
 (function (objects) {
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
-        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Player(name, x, y, isCentered) {
             if (name === void 0) { name = "supe1"; }
@@ -27,6 +26,14 @@ var objects;
             _this.Start();
             return _this;
         }
+        Object.defineProperty(Player.prototype, "FlySound", {
+            // PUBLIC PROPERTIES
+            get: function () {
+                return this._flySound;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
             // top boundary
@@ -67,6 +74,9 @@ var objects;
             this.name = "supe";
             this.x = 120;
             this.y = 300;
+            this._flySound = createjs.Sound.play("wind");
+            this._flySound.loop = -1; // loop forever
+            this._flySound.volume = 0.5;
         };
         Player.prototype.Update = function () {
             this._move();

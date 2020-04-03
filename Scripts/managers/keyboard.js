@@ -40,29 +40,39 @@ var managers;
                         this.fire = false;
                         break;
                     }
+                case config.Keys.S:
+                    this.shield = true;
+                    break;
+                case config.Keys.D:
+                    this.cheat = true;
+                    break;
             }
         };
         Keyboard.prototype.onKeyUp = function (event) {
             switch (event.keyCode) {
-                case config.Keys.W:
+                // case config.Keys.W:
                 case config.Keys.UP_ARROW:
                     this.moveForward = false;
                     break;
-                case config.Keys.A:
+                // case config.Keys.A:
                 case config.Keys.LEFT_ARROW:
                     this.moveLeft = false;
                     break;
-                case config.Keys.S:
                 case config.Keys.DOWN_ARROW:
                     this.moveBackward = false;
                     break;
-                case config.Keys.D:
                 case config.Keys.RIGHT_ARROW:
                     this.moveRight = false;
                     break;
                 case config.Keys.SPACE:
                     this.fireOnce = true;
                     this.fire = false;
+                    break;
+                case config.Keys.S:
+                    this.shield = false;
+                    break;
+                case config.Keys.D:
+                    this.cheat = false;
                     break;
             }
         };

@@ -12,6 +12,8 @@ module managers {
       public paused?: boolean;
       public mute?: boolean;
       public fireOnce = true;
+      public shield?: boolean;
+      public cheat?: boolean;
   
       // constructors
       constructor() {
@@ -55,28 +57,35 @@ module managers {
               this.fire = false;
               break;
             }
-            
+          
+            case config.Keys.S:
+              this.shield = true;
+            break;
+
+            case config.Keys.D:
+              this.cheat = true;
+            break;
         }
       }
   
       public onKeyUp(event:KeyboardEvent): void {
         switch(event.keyCode) {
-          case config.Keys.W:
+          // case config.Keys.W:
           case config.Keys.UP_ARROW:
             this.moveForward = false;
           break;
   
-          case config.Keys.A:
+          // case config.Keys.A:
           case config.Keys.LEFT_ARROW:
             this.moveLeft = false;
           break;
   
-          case config.Keys.S:
+          
           case config.Keys.DOWN_ARROW:
             this.moveBackward = false;
           break;
   
-          case config.Keys.D:
+        
           case config.Keys.RIGHT_ARROW:
             this.moveRight = false;
           break;
@@ -85,7 +94,14 @@ module managers {
             this.fireOnce = true;
             this.fire = false;
           break;
-  
+
+          case config.Keys.S:
+            this.shield = false;
+            break;
+
+          case config.Keys.D:
+            this.cheat = false;
+          break;
         }
       }
     }

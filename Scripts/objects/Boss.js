@@ -29,12 +29,30 @@ var objects;
             _this._live = 15;
             _this._dy = 0; //speed
             _this._dx = 0;
+            _this._play = true;
             _this.isActive = false;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Boss.prototype, "live", {
+        Object.defineProperty(Boss.prototype, "BackgroundSound", {
             // PUBLIC PROPERTIES
+            get: function () {
+                return this._backgroundSound;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Boss.prototype, "Play", {
+            get: function () {
+                return this._play;
+            },
+            set: function (v) {
+                this._play = v;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Boss.prototype, "live", {
             get: function () {
                 return this._live;
             },
@@ -86,9 +104,18 @@ var objects;
         Boss.prototype.Update = function () {
             this._move();
             this._checkBounds();
+            this.PlayMusic();
         };
         Boss.prototype.Reset = function () {
             this.position = new objects.Vector2(1500, 100, this);
+        };
+        Boss.prototype.PlayMusic = function () {
+            if (this._play) {
+                this._backgroundSound = createjs.Sound.play("backgroundMusic");
+                this._backgroundSound.loop = -1; // loop forever
+                this._backgroundSound.volume = 0.7;
+                this._play = false;
+            }
         };
         Boss.prototype.canShoot = function () {
             if (!this.isColliding) {

@@ -11,9 +11,24 @@ module objects
         private _live : number = 15;
         private _dy: number =0; //speed
         private _dx:number =0;
+        private _play = true;
+        private _backgroundSound : createjs.AbstractSoundInstance;
      
         // PUBLIC PROPERTIES
+
+        public get BackgroundSound():createjs.AbstractSoundInstance
+        {
+            return this._backgroundSound;
+        }
         
+        public set Play(v : boolean) {
+            this._play = v;
+        }
+
+        public get Play(): boolean{
+            return this._play;
+        }
+
         public get live() : number {
             return this._live;
         }
@@ -41,7 +56,7 @@ module objects
         protected _checkBounds(): void {
             if (this.y < 0 + this.halfHeight + 20)
             {
-               this.y = 0 + this.halfHeight + 20
+                this.y = 0 + this.halfHeight + 20
             }
 
             if(this.y > config.Game.SCREEN_HEIGHT - (this.halfHeight + 20))
@@ -75,13 +90,21 @@ module objects
         public Update(): void {
             this._move();
             this._checkBounds();
-          
+            this.PlayMusic();
         }
         public Reset(): void {
            
             this.position = new Vector2(1500, 100, this)
         }
 
+        public PlayMusic() {
+            if(this._play) {
+                this._backgroundSound = createjs.Sound.play("backgroundMusic");
+                this._backgroundSound.loop = -1; // loop forever
+                this._backgroundSound.volume = 0.7; 
+                this._play = false;
+            } 
+        }
         public canShoot(): boolean
         {
             if(!this.isColliding)
