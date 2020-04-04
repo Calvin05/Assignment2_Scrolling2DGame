@@ -12,6 +12,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/*
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game
+    Revision History: v1.9
+*/
 var scenes;
 (function (scenes) {
     var Start = /** @class */ (function (_super) {
@@ -34,10 +42,10 @@ var scenes;
             this._city = new objects.City();
             this._title = new objects.Image("title", 600, 130, true);
             this._supeAnimation = this.FlyAnimation();
-            this.Main();
             this._backgroundMusic = createjs.Sound.play("b1");
             this._backgroundMusic.loop = -1; // loop forever
             this._backgroundMusic.volume = 0.5;
+            this.Main();
         };
         Start.prototype.Update = function () {
             this._city.Update();
