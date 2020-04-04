@@ -35,12 +35,16 @@ var scenes;
             this._title = new objects.Image("title", 600, 130, true);
             this._supeAnimation = this.FlyAnimation();
             this.Main();
+            this._backgroundMusic = createjs.Sound.play("b1");
+            this._backgroundMusic.loop = -1; // loop forever
+            this._backgroundMusic.volume = 0.5;
         };
         Start.prototype.Update = function () {
             this._city.Update();
             this.titleAniation();
         };
         Start.prototype.Main = function () {
+            var _this = this;
             this.addChild(this._city);
             this.addChild(this._startButton);
             this.addChild(this._introButton);
@@ -48,29 +52,22 @@ var scenes;
             this.addChild(this._supeAnimation);
             this._startButton.on("click", function () {
                 config.Game.SCENE = scenes.State.PLAY;
+                config.Game.LIVES = 3;
+                config.Game.BULLET = 10;
+                config.Game.SCORE = 0;
+                _this._backgroundMusic.stop();
             });
             this._introButton.on("click", function () {
                 config.Game.SCENE = scenes.State.INTRO;
+                _this._backgroundMusic.stop();
             });
             // this.ShieldAnimation(this._supe.x, this._supe.y);
         };
         Start.prototype.FlyAnimation = function () {
-            var chopperImg1 = new Image();
-            var chopperImg2 = new Image();
-            chopperImg1.src = "./Assets/images/supe1.png";
-            chopperImg2.src = "./Assets/images/supe2.png";
-            var spriteSheet = new createjs.SpriteSheet({
-                images: [chopperImg1, chopperImg2],
-                frames: { width: 200, height: 46, count: 2 },
-                animations: {
-                    fly: [0, 1, "fly"]
-                }
-            });
-            var flyAnimation = new createjs.Sprite(spriteSheet);
+            var flyAnimation = new createjs.Sprite(config.Game.TEXTURE_ATLAS);
             flyAnimation.x = 500;
             flyAnimation.y = 300;
-            flyAnimation.spriteSheet.getAnimation('fly').speed = 0.1;
-            flyAnimation.gotoAndPlay('fly');
+            flyAnimation.gotoAndPlay('supe1');
             // this.addChild(flyAnimation);
             return flyAnimation;
         };

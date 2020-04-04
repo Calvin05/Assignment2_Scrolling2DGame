@@ -12,6 +12,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/*
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game
+    Revision History: v1.9
+*/
 var scenes;
 (function (scenes) {
     var End = /** @class */ (function (_super) {
@@ -33,7 +41,8 @@ var scenes;
             this._playerScoreImage = new objects.Image("playerscore", 735, 400, true);
             //instantiate a new Text object
             // buttons
-            this._backButton = new objects.Button("start", 600, 530, true);
+            this._backButton = new objects.Button("start", 500, 530, true);
+            this._menuLabel = new objects.Label("menu", "60px", "Impact, Charcoal, sans-serif", "#FFA07A", 700, 530, true);
             this._scoreboard = new managers.ScoreBoard();
             this.Main();
         };
@@ -50,6 +59,10 @@ var scenes;
                 config.Game.LIVES = 3;
                 config.Game.BULLET = 10;
                 config.Game.SCORE = 0;
+            });
+            this.addChild(this._menuLabel);
+            this._menuLabel.on("click", function () {
+                config.Game.SCENE = scenes.State.START;
             });
             this.addChild(this._highScoreImage);
             this.addChild(this._playerScore);

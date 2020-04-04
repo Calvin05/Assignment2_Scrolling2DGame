@@ -1,3 +1,11 @@
+/* 
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game 
+    Revision History: v1.9
+*/
 module objects 
 {
     export class Boss extends GameObject
@@ -102,10 +110,7 @@ module objects
                 this._backgroundSound = createjs.Sound.play("backgroundMusic");
                 this._backgroundSound.loop = -1; // loop forever
                 this._backgroundSound.volume = 0.7; 
-              
-                 createjs.Sound.play("laugh");
-              
-               
+                createjs.Sound.play("laugh");
                 this._play = false;
             } 
         }

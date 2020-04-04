@@ -1,3 +1,11 @@
+/* 
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game 
+    Revision History: v1.9
+*/
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
 let Game = (function(){
@@ -42,7 +50,9 @@ let Game = (function(){
         {id:"shieldSound", src:"./Assets/audio/shieldSound.mp3"},
         {id:"backgroundMusic", src:"./Assets/audio/backgroundMusic.wav"},
         {id:"power", src:"./Assets/audio/PowerUp.wav"},
-        {id:"laugh", src:"./Assets/audio/laugh.mp3"}
+        {id:"laugh", src:"./Assets/audio/laugh.mp3"},
+        {id:"b1", src:"./Assets/audio/b1.wav"},
+        {id:"error", src:"./Assets/audio/error.wav"}
         
     ];
 
@@ -119,6 +129,7 @@ let Game = (function(){
             "intro": { "frames": [12] },
             "start": { "frames": [15] },   
             "boss1": { "frames": [19, 26, 18, 21, 23, 27], "speed": 0.1},
+            "boss2": { "frames": [19]},
             "supe1": { "frames": [22, 25], "speed": 0.1 },
             "e1": { "frames": [29, 28, 24, 20, 17, 16, 14, 13, 8, 7, 5, 11, 6, 4, 9, 56],
                     "speed": 0.5, "next": false},

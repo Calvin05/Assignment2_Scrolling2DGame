@@ -11,6 +11,7 @@ module scenes
         private _title:objects.Image;
         public hit = false;
         private _supeAnimation:createjs.Sprite;
+        private _backgroundMusic:createjs.AbstractSoundInstance;
 
         // PUBLIC PROPERTIES
 
@@ -38,6 +39,9 @@ module scenes
             
             this._supeAnimation = this.FlyAnimation();
             this.Main();
+            this._backgroundMusic = createjs.Sound.play("b1");
+            this._backgroundMusic.loop = -1; // loop forever
+            this._backgroundMusic.volume = 0.5; 
         }        
         
         public Update(): void 
@@ -58,10 +62,15 @@ module scenes
 
             this._startButton.on("click", ()=>{
                 config.Game.SCENE = scenes.State.PLAY;
+                config.Game.LIVES = 3;
+                config.Game.BULLET =10;
+                config.Game.SCORE = 0;
+                this._backgroundMusic.stop();
             });
 
             this._introButton.on("click", ()=>{
                 config.Game.SCENE = scenes.State.INTRO;
+                this._backgroundMusic.stop();
             });
             
               
@@ -71,26 +80,12 @@ module scenes
         }
 
         public FlyAnimation() {
-            let chopperImg1 = new Image();
-            let chopperImg2 = new Image();
-           
-           
-            chopperImg1.src = "./Assets/images/supe1.png";
-            chopperImg2.src = "./Assets/images/supe2.png";
-           
-            let spriteSheet = new createjs.SpriteSheet({
-                images: [ chopperImg1, chopperImg2],
-                frames: { width: 200, height:46, count: 2},
-                animations: {
-                    fly: [0, 1, "fly"]
-                }
-            });
 
-            let flyAnimation = new createjs.Sprite(spriteSheet);
+            let flyAnimation = new createjs.Sprite(config.Game.TEXTURE_ATLAS);
                 flyAnimation.x = 500;
                 flyAnimation.y = 300;
-                flyAnimation.spriteSheet.getAnimation('fly').speed = 0.1;
-                flyAnimation.gotoAndPlay('fly');
+              
+                flyAnimation.gotoAndPlay('supe1');
                 
                 // this.addChild(flyAnimation);
                 return flyAnimation;

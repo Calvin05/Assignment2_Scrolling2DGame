@@ -1,3 +1,11 @@
+/* 
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game 
+    Revision History: v1.9
+*/
 module scenes
 {
     export class End extends objects.Scene
@@ -10,6 +18,7 @@ module scenes
         private _highScoreImage:objects.Image;
         private _playerScore: objects.Label;
         private _playerScoreImage: objects.Image;
+        private _menuLabel:objects.Label;
 
         // PUBLIC PROPERTIES
 
@@ -34,7 +43,8 @@ module scenes
             this._playerScoreImage = new objects.Image("playerscore", 735, 400, true);
              //instantiate a new Text object
             // buttons
-            this._backButton = new objects.Button("start", 600, 530, true);
+            this._backButton = new objects.Button("start", 500, 530, true);
+            this._menuLabel = new objects.Label("menu", "60px", "Impact, Charcoal, sans-serif", "#FFA07A", 700, 530, true);
             this._scoreboard = new managers.ScoreBoard();
 
             this.Main();
@@ -57,6 +67,11 @@ module scenes
                 config.Game.LIVES = 3;
                 config.Game.BULLET =10;
                 config.Game.SCORE = 0;
+                
+            });
+            this.addChild(this._menuLabel)
+            this._menuLabel.on("click", ()=>{
+                config.Game.SCENE = scenes.State.START;
                 
             });
             this.addChild(this._highScoreImage);

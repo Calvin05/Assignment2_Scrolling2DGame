@@ -120,6 +120,9 @@ var scenes;
                         this.fire = false;
                         this._scoreBoard.Bullet--;
                     }
+                    else {
+                        createjs.Sound.play("error");
+                    }
                 }
             }
             if (!config.Game.keyboardManager.fire) {
@@ -213,8 +216,9 @@ var scenes;
             else {
                 eBullet.x += eSpeed;
                 eBullet.position.x += eMove;
-                if (eBullet.y >= 1200) {
+                if (eBullet.x >= 1300) {
                     this.removeChild(eBullet);
+                    eBullet.position = new objects.Vector2(-400, -1000);
                 }
             }
         };
@@ -321,7 +325,7 @@ var scenes;
         };
         Play.prototype.WinOrLoseCondition = function () {
             if (this._boss.live < 1) {
-                config.Game.SCORE += 500 + (50 * config.Game.BULLET) + (100 * config.Game.LIVES);
+                config.Game.SCORE += 1000 + (50 * config.Game.BULLET) + (100 * config.Game.LIVES);
                 if (config.Game.SCORE > config.Game.HIGH_SCORE) {
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }

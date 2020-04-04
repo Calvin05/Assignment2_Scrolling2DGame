@@ -12,6 +12,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/*
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game
+    Revision History: v1.9
+*/
 var objects;
 (function (objects) {
     var City = /** @class */ (function (_super) {
