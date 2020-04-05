@@ -27,17 +27,7 @@ let Game = (function(){
     [
         {id:"atlas", src:"./Assets/sprites/atlas.png"},
         {id:"smokeIm", src:"./Assets/sprites/smokeatlas.png"},
-    
-        {id:"placeholder", src:"./Assets/images/placeholder.png"},
-        {id:"startButton", src:"./Assets/images/start.png"},
-        {id:"introButton", src:"./Assets/images/intro.png"},
         {id:"city", src:"./Assets/images/city.jpg"},
-       
-        {id:"title", src:"./Assets/images/title.png"},
-        {id:"beam", src:"./Assets/images/beam.png"},
-        {id:"bullet", src:"./Assets/images/bullet.png"},
-        {id:"beam2", src:"./Assets/images/beam2.png"},
-        {id:"enemy", src:"./Assets/images/alien.png"},
         {id:"m1", src:"./Assets/audio/m1.mp3"},
         {id:"smoke", src:"./Assets/audio/smoke.wav"},
         {id:"electric", src:"./Assets/audio/electric.wav"},
