@@ -1,3 +1,11 @@
+/* 
+    Author: Viet Cuong Nguyen
+    ID: 300972502
+    Last Modified by: Viet Cuong Nguyen
+    Date last Modified: 04/03/2020
+    Description: Shooting game 
+    Revision History: v1.9
+*/
 module scenes
 {
     export class Intro extends objects.Scene
