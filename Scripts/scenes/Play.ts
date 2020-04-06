@@ -390,7 +390,8 @@ module scenes
                 {
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }
-                this.removesound()
+                this.removesound();
+                config.Game.MESSAGE = "You WIN!"
                 config.Game.SCENE = scenes.State.END;
             }
 
@@ -400,6 +401,7 @@ module scenes
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }
                 this.removesound();
+                config.Game.MESSAGE = "You Lose!";
                 config.Game.SCENE = scenes.State.END;
             }
         }

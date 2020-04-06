@@ -338,6 +338,7 @@ var scenes;
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }
                 this.removesound();
+                config.Game.MESSAGE = "You WIN!";
                 config.Game.SCENE = scenes.State.END;
             }
             if (config.Game.LIVES < 1) {
@@ -345,6 +346,7 @@ var scenes;
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }
                 this.removesound();
+                config.Game.MESSAGE = "You Lose!";
                 config.Game.SCENE = scenes.State.END;
             }
         };
