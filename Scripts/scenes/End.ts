@@ -42,9 +42,7 @@ module scenes
             this._highScoreImage = new objects.Image("highscore", 600, 150, true);
             this._playerScore =  new objects.Label("Your Score: " + config.Game.SCORE, "40px", "Impact, Charcoal, sans-serif", "#ffffff",430, 390, false);
             this._playerScoreImage = new objects.Image("playerscore", 735, 400, true);
-             
             this._message =  new objects.Label(config.Game.MESSAGE, "50px", "Impact, Charcoal, sans-serif", "#ffffff",600, 320, true);
-     
             this._backButton = new objects.Button("start", 500, 530, true);
             this._menuLabel = new objects.Label("menu", "60px", "Impact, Charcoal, sans-serif", "#FFA07A", 700, 530, true);
             this._scoreboard = new managers.ScoreBoard();
